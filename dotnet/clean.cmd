@@ -1,0 +1,1 @@
+for /r %%1 in (*.sln) do echo %%~p1

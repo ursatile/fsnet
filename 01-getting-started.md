@@ -2,50 +2,141 @@
 title: "1: Getting Started"
 layout: home
 nav_order: 01
+typora-copy-images-to: ./assets/images
 ---
-Start here. These are the things.
+In this workshop, we're going to create a web application called Tikitapp, for selling concert tickets.
 
-This is a *bare-minimum* template to create a Jekyll site that uses the [Just the Docs] theme. You can easily set the created site to be published on [GitHub Pages] – the [README] file explains how to do that, along with other details.
+We'll start by creating a new .NET solution, an ASP.NET MVC web application, and an xUnit test project.
+
+First, check you have the .NET SDK installed. Typing `dotnet --version` at a command prompt should give you a version number beginning with `6.0`:
+
+```bash
+$ dotnet --version
+6.0.306
+```
+
+Now, we're going to use the `dotnet new` command to create our solution and project files:
+
+First, run:
 
 ```bash
 dotnet new sln -o Tikitapp
+```
+
+That'll create a new folder called `Tikitapp`, containing an empty solution file `Tikitapp.sln`.
+
+Next, we'll add some projects to our solution - an ASP.NET MVC web application called `Tikitapp.Website`, and an xUnit test project called `Tikitapp.Website.Tests`:
+
+```bash
 cd Tikitapp
 dotnet new mvc -o Tikitapp.Website
 dotnet new xunit -o Tikitapp.Website.Tests
 dotnet sln add Tikitapp.Website
 dotnet sln add Tikitapp.Website.Tests
-dotnet build
-dotnet test
 ```
 
-That'll do stuff.
+Finally, let's check we can build, test, and run our application.
 
-```csharp
-// Tikitapp.Website/Program.cs
+To build the solution, open the `Tikitapp` directory and type `dotnet build`:
 
-{% include_relative dotnet/module01/Tikitapp/Tikitapp.Website/Program.cs %}
+```
+D:\Projects\Tikitapp>dotnet build
+
+Microsoft (R) Build Engine version 17.2.2+038f9bae9 for .NET
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  Tikitapp.Website.Tests -> D:\Projects\Tikitapp\Tikitapp.Website.Tests\bin\Debug\net6.0\Tikitapp.Website.Tests.dll
+  Tikitapp.Website -> D:\Projects\Tikitapp\Tikitapp.Website\bin\Debug\net6.0\Tikitapp.Website.dll
+
+<span color="green">Build succeeded.</span>
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.93
 ```
 
-If [Jekyll] is installed on your computer, you can also build and preview the created site *locally*. This lets you test changes before committing them, and avoids waiting for GitHub Pages.[^1] And you will be able to deploy your local build to a different platform than GitHub Pages.
+To run our web application, we need to specify which project to start:
 
-More specifically, the created site:
+```bash
+D:\Projects\Tikitapp>dotnet run --project Tikitapp.Website
 
-- uses a gem-based approach, i.e. uses a `Gemfile` and loads the `just-the-docs` gem
-- uses the [GitHub Pages / Actions workflow] to build and publish the site on GitHub Pages
+Building...
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: https://localhost:7183
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5083
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: D:\Projects\Tikitapp\Tikitapp.Website\
+```
 
-Other than that, you're free to customize sites that you create with this template, however you like. You can easily change the versions of `just-the-docs` and Jekyll it uses, as well as adding further plugins.
+Ctrl-clicking (or cmd-click on macOS) the `https://` URL in the output should open the website in your default browser:
 
-[Browse our documentation][Just the Docs] to learn more about how to use this theme.
+![image-20221130154618189](D:\Projects\github\ursatile\fsnet\assets\images\image-20221130154618189.png)
 
-To get started with creating a site, just click "[use this template]"!
+Finally, check that we can run our xUnit test project:
 
-----
+```
+D:\Projects\Tikitapp>dotnet test
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  Tikitapp.Website.Tests -> D:\Projects\Tikitapp\Tikitapp.Website.Tests\bin\Debug\net6.0\Tikitapp.W
+  ebsite.Tests.dll
+Test run for D:\Projects\Tikitapp\Tikitapp.Website.Tests\bin\Debug\net6.0\Tikitapp.Website.Tests.dll (.NETCoreApp,Version=v6.0)
+Microsoft (R) Test Execution Command Line Tool Version 17.2.0 (x64)
+Copyright (c) Microsoft Corporation.  All rights reserved.
 
-[^1]: [It can take up to 10 minutes for changes to your site to publish after you push the changes to GitHub](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll#creating-your-site).
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
 
-[Just the Docs]: https://just-the-docs.github.io/just-the-docs/
-[GitHub Pages]: https://docs.github.com/en/pages
-[README]: https://github.com/just-the-docs/just-the-docs-template/blob/main/README.md
-[Jekyll]: https://jekyllrb.com
-[GitHub Pages / Actions workflow]: https://github.blog/changelog/2022-07-27-github-pages-custom-github-actions-workflows-beta/
-[use this template]: https://github.com/just-the-docs/just-the-docs-template/generate
+Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < 1 ms - Tikitapp.Website.Tests.dll (net6.0)
+```
+
+So far, so good - but before we start adding features to our application, there's a few things we're going to change.
+
+## Code Formatting with EditorConfig
+
+We're going to use a `.editorconfig` file to manage the formatting and layout of the source code in our application. 
+
+{: .note }
+EditorConfig is a way to maintain consistent coding styles for multiple developers working on the same project across various editors and IDEs. You can read more about it at [editorconfig.org](https://editorconfig.org)
+
+You can find the  `.editorconfig` file we'll use here: [.editorconfig](dotnet/module02/Tikitapp/.editorconfig)
+
+Add this file to your solution folder alongside your `Tikitapp.sln` file. 
+
+{: .note }
+**For Windows Users:** To create an `.editorconfig` file within Windows Explorer, you need to create a file named `.editorconfig.` (note the trailing dot), which Windows Explorer will automatically rename to `.editorconfig` for you.
+
+After adding the .editorconfig file, reformat all the files in your project to match the project's new formatting settings.
+
+From the command line:
+
+```bash
+D:\Projects\Tikitapp>dotnet format
+```
+
+That will reformat all the `.cs` files in the solution to conform to the code style specified in `.editorconfig`
+
+{: .highlight }
+
+> The `.editorconfig` used in this  workshop uses tabs for indentation, not spaces. I used to prefer spaces for indentation. Then I read Adam Tuttle's article  "[Tabs vs Spaces: It's an Accessibility Issue](https://adamtuttle.codes/blog/2021/tabs-vs-spaces-its-an-accessibility-issue/)", and that completely changed my mind. I can use tabs. No big deal. But there are developers out there for whom tabs vs spaces is a Big Deal. Developers with visual impairments who use an extra-large font size, who set their tab width to 1 character. Developers using Braille displays, for whom a tab only occupies a single Braille cell. So now I use tabs wherever I can.
+
+## Review and Recap
+
+In this module, we've:
+
+* Used the `dotnet` command line tooling to create a new .NET solution
+* Created an ASP.NET MVC web application and an xUnit test project
+* Added our projects to our solution
+* Checked that we can build, run, and test our application
+* Added a `.editorconfig` file to manage the code style and formatting in our project
+* Used the `dotnet format` tool to reformat the code in our solution to match our code style.
+
+
+

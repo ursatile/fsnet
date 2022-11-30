@@ -39,6 +39,32 @@ Other than that, you're free to customize sites that you create with this templa
 
 To get started with creating a site, just click "[use this template]"!
 
+
+
+
+
+
+```csharp
+// Tikitapp.Website/Program.cs
+
+{% include_relative dotnet/module01/Tikitapp/Tikitapp.Website/Program.cs %}
+```
+
+{: .important }
+This is important
+
+{: .highlight }
+This is a highlight
+
+{: .warning }
+This is a warning.
+
+{: .note }
+This is a note
+
+{: .new}
+This is new
+
 ----
 
 [^1]: [It can take up to 10 minutes for changes to your site to publish after you push the changes to GitHub](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll#creating-your-site).
