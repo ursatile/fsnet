@@ -2,3 +2,18 @@ $pink-000: #f77ef1;
 $pink-100: #f967f1;
 $pink-200: #e94ee1;
 $pink-300: #dd2cd4;
+
+ul#index-nav {
+    list-style-type: none;    
+    li::before {
+        content: none;
+    }
+    padding: 0;
+    margin: 0; 
+    a {
+        font-weight: bold;        
+    }   
+    p { 
+        padding-left: 20px;
+    }
+}

@@ -3,6 +3,8 @@ title: "1: Getting Started"
 layout: home
 nav_order: 01
 typora-copy-images-to: ./assets/images
+summary: >
+    In this section, we'll use the dotnet SDK to create a .NET 6 solution and set up the ASP.NET Core MVC web application and an xUnit test project we'll be using throughout the workshop.
 ---
 In this workshop, we're going to create a web application called Tikitapp, for selling concert tickets.
 
