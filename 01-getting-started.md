@@ -1,6 +1,6 @@
 ---
 title: "1: Getting Started"
-layout: home
+layout: module
 nav_order: 01
 typora-copy-images-to: ./assets/images
 summary: >

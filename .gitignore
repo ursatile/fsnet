@@ -9,5 +9,6 @@ _site/
 .bundle/
 # vendor/
 
-bin
-obj
+bin/
+obj/
+.vs/

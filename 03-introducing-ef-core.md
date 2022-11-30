@@ -1,9 +1,9 @@
 ---
-title: "2: Testing ASP.NET Web Apps"
+title: "3: Introducing EF Core"
 layout: module
-nav_order: 02
+nav_order: 03
 summary: >
-    In this section, we'll add some tests to our application to demonstrate two different testing styles that work well with ASP.NET Core web applications.
+    In this section, we'll introduce the Entity Framework Core (EF Core) package, and look at how we can use EF Core to manage access to data stored in a SQL database.
 ---
 In the last section, we set up our basic ASP.NET MVC web application and created a test project for it.
 

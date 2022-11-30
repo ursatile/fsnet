@@ -29,6 +29,8 @@ exclude:
    - Rakefile
    - README.md
    - .vs/
+   - dotnet/*/bin/**
+   - dotnet/*/obj/**
 
 include:
   - .editorconfig
