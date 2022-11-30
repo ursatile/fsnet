@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tikitapp.Website", "Tikitapp.Website\Tikitapp.Website.csproj", "{BEE75E00-947B-4833-BFA5-B3AAF72C1ABE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tikitapp.Website.Tests", "Tikitapp.Website.Tests\Tikitapp.Website.Tests.csproj", "{E105A440-27CF-4599-B56B-BBA9D4112054}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BEE75E00-947B-4833-BFA5-B3AAF72C1ABE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEE75E00-947B-4833-BFA5-B3AAF72C1ABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEE75E00-947B-4833-BFA5-B3AAF72C1ABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEE75E00-947B-4833-BFA5-B3AAF72C1ABE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E105A440-27CF-4599-B56B-BBA9D4112054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E105A440-27CF-4599-B56B-BBA9D4112054}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E105A440-27CF-4599-B56B-BBA9D4112054}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E105A440-27CF-4599-B56B-BBA9D4112054}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
