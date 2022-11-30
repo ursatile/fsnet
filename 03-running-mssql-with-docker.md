@@ -44,13 +44,27 @@ Next, we'll run a SQL script to create a user, set up an empty database, and add
 To copy the script into our Docker container and run it:
 
 ```bash
-docker cp create-tikitapp-database.sql mssql2019:/opt/create-tikitapp-database.sql
+docker cp create-tikitapp-database.sql mssql2022:/opt/create-tikitapp-database.sql
 docker exec -it mssql2022 /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P p@ssw0rd -i /opt/create-tikitapp-database.sql
+```
+
+You should get a response something like:
+
+```
+Microsoft SQL Server 2022 (RTM) - 16.0.1000.6 (X64)
+        Oct  8 2022 05:58:25
+        Copyright (C) 2022 Microsoft Corporation
+        Developer Edition (64-bit) on Linux (Ubuntu 20.04.5 LTS) <X64>
+Changed database context to 'tikitapp'.
+Adding user [tikitapp_user] to database [tikitapp]
+Done.
+Adding user [tikitapp_user] to role [db_owner] in [tikitapp] database
+Done
 ```
 
 {: .warning }
 
 > If you're using an Apple Mac with the new Apple Silicon M1 or M2 processors, none of this will work, because there isn't an officially supported SQL Server image for the ARM64 architecture used in the M1/M2 Macs. I've had some success using the [Azure SQL Edge](https://hub.docker.com/_/microsoft-azure-sql-edge) Docker image on ARM64 Macs, but the ARM64 version of this image doesn't include the `sqlcmd` tool -- so even if you can get it to start, you'll need to connect from a tool like DataGrip and run the SQL script to create the database manually.
 >
-> Yeah. Progress sucks.
+> Yay progress! 🙃
 
