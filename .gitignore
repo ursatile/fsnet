@@ -9,6 +9,7 @@ _site/
 .bundle/
 # vendor/
 
-bin/
-obj/
-.vs/
+**/bin/
+**/obj/
+**/.vs/
+_NCrunch_*/
