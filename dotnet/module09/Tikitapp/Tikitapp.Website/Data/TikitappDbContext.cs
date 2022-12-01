@@ -17,8 +17,20 @@ public class TikitappDbContext : DbContext {
 	public virtual DbSet<Ticket> Tickets => Set<Ticket>();
 
 	protected override void OnModelCreating(ModelBuilder builder) {
+		
+		ConfigureSlugs(builder);
+		
 		builder.Entity<Artist>(entity => {
-			entity.HasMany(a => a.Shows).WithOne(s => s.Artist);
+			entity.HasMany(e => e.Shows).WithOne(e => e.Artist);
+		});
+		builder.Entity<Venue>(entity => {
+			entity.HasMany(e => e.Shows).WithOne(e => e.Venue);
+		});
+		builder.Entity<TicketType>(entity => {
+			entity.Property(e => e.Price).HasColumnType("money");
+		});
+		builder.Entity<Basket>(entity => {
+			entity.HasMany(e => e.Tickets).WithOne(e => e.Basket);
 		});
 	}
 
