@@ -43,7 +43,7 @@ namespace Tikitapp.Website.Migrations
 
                     b.HasIndex("Slug");
 
-                    b.ToTable("Artists");
+                    b.ToTable("Artists", (string)null);
                 });
 #pragma warning restore 612, 618
         }
