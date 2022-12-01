@@ -11,7 +11,7 @@ namespace Tikitapp.Website.Migrations {
 			migrationBuilder.CreateTable(
 				name: "Artists",
 				columns: table => new {
-					Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+					Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
 					Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
 				},
 				constraints: table => {

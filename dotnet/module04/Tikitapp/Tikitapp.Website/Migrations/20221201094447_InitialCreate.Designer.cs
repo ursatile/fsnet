@@ -12,7 +12,7 @@ using Tikitapp.Website.Data;
 namespace Tikitapp.Website.Migrations
 {
     [DbContext(typeof(TikitappDbContext))]
-    [Migration("20221130233944_InitialCreate")]
+    [Migration("20221201094447_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -29,7 +29,8 @@ namespace Tikitapp.Website.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
 
                     b.Property<string>("Name")
                         .IsRequired()

@@ -148,7 +148,15 @@ namespace Tikitapp.Website.Migrations {
 
 Every migration has two methods - `Up` and `Down`. `Up` happens when we update the database; `Down` will be run if we need to roll back this migration.
 
-This migration has not been applied to our database yet: it's a chance to look at what *will* happen when we apply it, and check it's doing the right thing. It's... almost right. Almost. The Name column is going to be created as `type: "nvarchar(max)"` - that's an infinitely long Unicode string. Unicode is fine, but we probably don't want the names of our artists to be infinitely long.
+This migration has not been applied to our database yet: it's a chance to look at what *will* happen when we apply it, and check it's doing the right thing. It's... almost right. 
+
+:white_check_mark: EF Core has inferred from the property name `Id` that this should be the primary key on our `Artist` table
+:white_check_mark: EF Core has mapped the `Guid` to an SQL `uniqueidentifier`
+:white_check_mark: Both the `Id` and `Name` columns are `nullable: false` (remember, we're in .NET 6 here, where *nothing* is nullable unless you ask nicely)
+
+But there are two things I'd like to fix:
+
+First: the `Name` column is going to be created as `type: "nvarchar(max)"` - that's an infinitely long Unicode string. Unicode is fine, but we probably don't want the names of our artists to be infinitely long.
 
 Choosing sensible field lengths  is vitally important when creating a data schema, and the best way to find sensible lengths is to look for real-world outliers. The `Artist` table in our model is to store artists - bands, musicians, orchestras. A quick Google search suggests that the longest band names out there are:
 
@@ -160,9 +168,19 @@ Choosing sensible field lengths  is vitally important when creating a data schem
 
 So 100 Unicode characters -- `nvarchar(100)` -- looks like a pretty good choice for our artist name column.
 
-There's a few different ways we could make this happen:
+Second: we haven't specified a database-level default for the `Id` column
 
-#### Edit the migration 
+We also want to make sure that new artists are assigned a new `Id` when they're created. We're using a GUID as our primary key; EF Core will automatically generate a `Guid.NewGuid()` ID when inserting new records, and this could potentially cause problems in future, because the primary key is a **clustered index**. 
+
+{: .highlight }
+
+> Back in the days of tapes and spinning disks, a clustered indexes were big deal because they controlled the physical order of records on the storage media: adding new records to the end was cheap, but inserting a new record in the middle could be really, really expensive. Even in these days of solid-state devices, it's [a good idea for the primary key to be a clustered index](https://dba.stackexchange.com/questions/8496/is-the-concept-of-a-clustered-index-in-a-db-design-sensical-when-using-ssds#:~:text=%22A%20clustered%20index%20determines%20the,a%20seek%20through%20the%20table.)
+
+Clustered indexes work best when they use increasing values -- new records have higher Ids than old records. If we were using an old-fashioned `int identity(1,1)`, we'd get this for free. With a GUID key, we need to specify that SQL should use `NEWSEQUENTIALID()` to generate the key for new records.
+
+There are several different ways to control the SQL schema that's generated when we apply our migration:
+
+#### Edit the migration
 
 Migrations are just C# code; once they're generated, they're part of our project and we can edit them as much as we need to. We could just replace `nvarchar(max)` with `nvarchar(100)` -- as long as we do this before we apply the migration, we'll get the correct column length when the table is created.
 
@@ -173,7 +191,13 @@ Rather than editing the migration, we can explicitly define our field types and 
 ```csharp
 protected override void OnModelCreating(ModelBuilder builder) {
 	builder.Entity<Artist>(entity => {
+
+		// Specify a column size for the Name property
 		entity.Property(e => e.Name).HasMaxLength(100);
+
+		// Specify a default SQL expression for new Id values
+		entity.Property(e => e.Id).HasDefaultValueSql("NEWSEQUENTIALID()");
+
 	});
 }
 ```
@@ -194,9 +218,9 @@ public class Artist {
 }
 ```
 
-In this case, we're going to use the `MaxLength` attribute, since this can also be useful for frontend model validation.
+In this case, we're going to use the `MaxLength` attribute for the `Name` property, since this can also be useful for frontend model validation, and we'll override `OnModelBuilding` to specify a default value for the `Id` column.
 
-As with the `OnModelBuilding` approach, once we've added the annotation, we need to remove and re-create our migration:
+Once we've updated the code, we need to remove and re-create our migration:
 
 ```bash
 dotnet ef migrations remove
@@ -212,6 +236,34 @@ dotnet ef database update
 That'll connect to the database and run the migration -- which creates the `Artist` table, complete with the `nvarchar(100)` column we talked about. It'll also create a tracking table called `__EFMigrationsHistory`, and insert a row into this table recording the fact that this migration has been applied.
 
 ![image-20221201004348884](D:\Projects\github\ursatile\fsnet\assets\images\image-20221201004348884.png)
+
+## Using Migrations to Populate Data
+
+As well as updating our database schema, we can use migrations to run SQL statements to insert or update data in our database. We're going to add another migration to populate our Artist table with some sample data.
+
+```bash
+dotnet ef migrations add InsertSampleArtistRecords
+```
+
+Then we'll edit our new migration to insert some Artist records.
+
+{: .note }
+
+We're specifying the values for the GUIDs in our SQL, so that we can tell at a glance whether a record is one of our sample data records or if it's real data from real users:
+
+```csharp
+// Tikitapp.Website/Data/TikitappDbContext.cs
+
+{% include_relative dotnet/module04/Tikitapp/Tikitapp.Website/Migrations/20221201094730_InsertSampleArtistRecords.cs %}
+```
+
+Finally, apply our migration:
+
+```
+dotnet ef database update
+```
+
+We now have a database with 26 example artist records in it.
 
 ## Review and Recap
 

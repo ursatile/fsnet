@@ -1,18 +1,9 @@
 ---
-title: "5: Testing Data-Driven Apps"
+title: "5: Using Data in Web Apps"
 layout: module
 nav_order: 05
 typora-copy-images-to: ./assets/images
 summary: >
-    In this section, we'll learn some approaches for testing data-driven applications.
+    In this section, we'll see how to connect our MVC application to our database using EF Core, how to use data in our controllers and views, and how to test controllers which rely on an EF Core DbContext.
 ---
-In the last section, we created an empty SQL Server database using Docker, and added a user that we can use to connect to that database from our application code.
-
-### THIS BIT:
-
-mocking
-
-inmemory database provider
-
-test data
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tikitapp.Website.Data;
 
@@ -11,9 +12,11 @@ using Tikitapp.Website.Data;
 namespace Tikitapp.Website.Migrations
 {
     [DbContext(typeof(TikitappDbContext))]
-    partial class TikitappDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221201094730_InsertSampleArtistRecords")]
+    partial class InsertSampleArtistRecords
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
