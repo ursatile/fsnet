@@ -79,9 +79,9 @@ dotnet ef migrations add AddSlugToArtist
 Then we're going to edit the migration to include a SQL statement that will generate slugs based on artist names:
 
 ```csharp 
-// Tikitapp.Website/Migrations/20221201140857_AddSlugToArtist.cs
+// Tikitapp.Website/Migrations/20221201173448_AddSlugToArtist.cs
 
-{% include_relative dotnet/module08/Tikitapp/Tikitapp.Website/Migrations/20221201140857_AddSlugToArtist.cs %}
+{% include_relative dotnet/module08/Tikitapp/Tikitapp.Website/Migrations/20221201173448_AddSlugToArtist.cs %}
 ```
 
 We'll update `Artists/Index.cshtml` to include the `Slug` when creating URLs:

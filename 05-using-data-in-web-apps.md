@@ -18,7 +18,7 @@ First, we'll create the `ArtistsController`:
 {% include_relative dotnet/module05/Tikitapp/Tikitapp.Website/Controllers/ArtistsController.cs %}
 ```
 
-Next, we'll create two new views -- one to display a list of artists, the other shows details of a particular artist.
+Next, we'll create two new views -- one to display a list of artists, the other lists all the forthcoming shows by a particular artist.
 
 Here's the code for `Index.cshtml`:
 
@@ -28,12 +28,12 @@ Here's the code for `Index.cshtml`:
 {% include_relative dotnet/module05/Tikitapp/Tikitapp.Website/Views/Artists/Index.cshtml %}
 ```
 
-And here's the code for `View.cshtml`
+And here's the code for `Shows.cshtml`
 
 ```html
-@* Tikitapp/Tikitapp.Website/Views/Artists/View.cshtml *@
+@* Tikitapp/Tikitapp.Website/Views/Artists/Shows.cshtml *@
 
-{% include_relative dotnet/module05/Tikitapp/Tikitapp.Website/Views/Artists/View.cshtml %}
+{% include_relative dotnet/module05/Tikitapp/Tikitapp.Website/Views/Artists/Shows.cshtml %}
 ```
 
 Finally, let's add a link to Artists to the top-level navigation on our site. Open `Views/Shared/_Layout.cshtml`, find the `<ul class="navbar-nav">` element, and add this snippet to it:

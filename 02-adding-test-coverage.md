@@ -133,6 +133,7 @@ The default ASP.NET MVC template includes a placeholder page for your site's pri
 
 * Add a controller test that verifies that the `Privacy()` action returns a valid `ViewResult`.
 * Modify the `Privacy.cshtml` view to include the following paragraph:
+
 ```
 <p>This site is published under the <a href="https://en.wikipedia.org/wiki/MIT_License">MIT License</a>.</p>
 ```
