@@ -2,6 +2,7 @@
 title: "3: Running MSSQL on Docker"
 layout: module
 nav_order: 03
+typora-copy-images-to: ./assets/images
 summary: >
     In this section, we'll use Docker to create a local instance of MS SQL Server and create an empty database to use with our .NET application.
 ---
