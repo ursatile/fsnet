@@ -1,3 +1,5 @@
+using Tikitapp.Website.Data.Entities;
+
 namespace Tikitapp.Website.Tests;
 
 public static class TestData {

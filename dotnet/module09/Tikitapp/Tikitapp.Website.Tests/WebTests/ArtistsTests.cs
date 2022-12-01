@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Tikitapp.Website.Data;
+using Tikitapp.Website.Data.Entities;
 
 namespace Tikitapp.Website.Tests.WebTests;
 

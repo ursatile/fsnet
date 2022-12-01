@@ -1,3 +1,5 @@
+using Tikitapp.Website.Data.Entities;
+
 namespace Tikitapp.Website.Tests.Controllers;
 
 public class ArtistsControllerTests {
