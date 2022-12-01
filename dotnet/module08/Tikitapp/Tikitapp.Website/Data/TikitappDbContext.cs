@@ -11,7 +11,6 @@ public class TikitappDbContext : DbContext {
 
 	protected override void OnModelCreating(ModelBuilder builder) {
 		builder.Entity<Artist>(entity => {
-			entity.Property(e => e.Id).HasDefaultValueSql("NEWSEQUENTIALID()");
 			entity.Property(e => e.Slug).IsUnicode(false);
 			entity.HasIndex(e => e.Slug);
 		});

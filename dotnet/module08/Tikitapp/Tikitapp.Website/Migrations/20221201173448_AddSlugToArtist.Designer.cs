@@ -12,7 +12,7 @@ using Tikitapp.Website.Data;
 namespace Tikitapp.Website.Migrations
 {
     [DbContext(typeof(TikitappDbContext))]
-    [Migration("20221201140857_AddSlugToArtist")]
+    [Migration("20221201173448_AddSlugToArtist")]
     partial class AddSlugToArtist
     {
         /// <inheritdoc />
@@ -29,8 +29,7 @@ namespace Tikitapp.Website.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasDefaultValueSql("NEWSEQUENTIALID()");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()

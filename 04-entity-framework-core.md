@@ -130,7 +130,7 @@ namespace Tikitapp.Website.Migrations {
 				name: "Artists",
 				columns: table => new {
 					Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-					Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+					Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
 				},
 				constraints: table => {
 					table.PrimaryKey("PK_Artists", x => x.Id);
@@ -154,9 +154,7 @@ This migration has not been applied to our database yet: it's a chance to look a
 :white_check_mark: EF Core has mapped the `Guid` to an SQL `uniqueidentifier`
 :white_check_mark: Both the `Id` and `Name` columns are `nullable: false` (remember, we're in .NET 6 here, where *nothing* is nullable unless you ask nicely)
 
-But there are two things I'd like to fix:
-
-First: the `Name` column is going to be created as `type: "nvarchar(max)"` - that's an infinitely long Unicode string. Unicode is fine, but we probably don't want the names of our artists to be infinitely long.
+There's one detail here we want to change. The `Name` column is going to be created as `type: "nvarchar(max)"` - that's an infinitely long Unicode string. Unicode is fine, but we probably don't want the names of our artists to be infinitely long.
 
 Choosing sensible field lengths  is vitally important when creating a data schema, and the best way to find sensible lengths is to look for real-world outliers. The `Artist` table in our model is to store artists - bands, musicians, orchestras. A quick Google search suggests that the longest band names out there are:
 
@@ -167,16 +165,6 @@ Choosing sensible field lengths  is vitally important when creating a data schem
 * Richard Cheese & Lounge Against The Machine *(43 letters)*
 
 So 100 Unicode characters -- `nvarchar(100)` -- looks like a pretty good choice for our artist name column.
-
-Second: we haven't specified a database-level default for the `Id` column
-
-We also want to make sure that new artists are assigned a new `Id` when they're created. We're using a GUID as our primary key; EF Core will automatically generate a `Guid.NewGuid()` ID when inserting new records, and this could potentially cause problems in future, because the primary key is a **clustered index**. 
-
-{: .highlight }
-
-> Back in the days of tapes and spinning disks, a clustered indexes were big deal because they controlled the physical order of records on the storage media: adding new records to the end was cheap, but inserting a new record in the middle could be really, really expensive. Even in these days of solid-state devices, it's [a good idea for the primary key to be a clustered index](https://dba.stackexchange.com/questions/8496/is-the-concept-of-a-clustered-index-in-a-db-design-sensical-when-using-ssds#:~:text=%22A%20clustered%20index%20determines%20the,a%20seek%20through%20the%20table.)
-
-Clustered indexes work best when they use increasing values -- new records have higher Ids than old records. If we were using an old-fashioned `int identity(1,1)`, we'd get this for free. With a GUID key, we need to specify that SQL should use `NEWSEQUENTIALID()` to generate the key for new records.
 
 There are several different ways to control the SQL schema that's generated when we apply our migration:
 
@@ -191,13 +179,8 @@ Rather than editing the migration, we can explicitly define our field types and 
 ```csharp
 protected override void OnModelCreating(ModelBuilder builder) {
 	builder.Entity<Artist>(entity => {
-
 		// Specify a column size for the Name property
 		entity.Property(e => e.Name).HasMaxLength(100);
-
-		// Specify a default SQL expression for new Id values
-		entity.Property(e => e.Id).HasDefaultValueSql("NEWSEQUENTIALID()");
-
 	});
 }
 ```
@@ -218,7 +201,7 @@ public class Artist {
 }
 ```
 
-In this case, we're going to use the `MaxLength` attribute for the `Name` property, since this can also be useful for frontend model validation, and we'll override `OnModelBuilding` to specify a default value for the `Id` column.
+In this case, we're going to use the `MaxLength` attribute for the `Name` property, since this can also be useful for frontend model validation.
 
 Once we've updated the code, we need to remove and re-create our migration:
 
@@ -252,9 +235,9 @@ Then we'll edit our new migration to insert some Artist records.
 We're specifying the values for the GUIDs in our SQL, so that we can tell at a glance whether a record is one of our sample data records or if it's real data from real users:
 
 ```csharp
-// Tikitapp.Website/Data/TikitappDbContext.cs
+// Tikitapp.Website/Migrations/20221201170934_InsertSampleArtistRecords.cs
 
-{% include_relative dotnet/module04/Tikitapp/Tikitapp.Website/Migrations/20221201094730_InsertSampleArtistRecords.cs %}
+{% include_relative dotnet/module04/Tikitapp/Tikitapp.Website/Migrations/20221201170934_InsertSampleArtistRecords.cs %}
 ```
 
 Finally, apply our migration:

@@ -12,8 +12,8 @@ using Tikitapp.Website.Data;
 namespace Tikitapp.Website.Migrations
 {
     [DbContext(typeof(TikitappDbContext))]
-    [Migration("20221201094447_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20221201170934_InsertSampleArtistRecords")]
+    partial class InsertSampleArtistRecords
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,8 +29,7 @@ namespace Tikitapp.Website.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasDefaultValueSql("NEWSEQUENTIALID()");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()

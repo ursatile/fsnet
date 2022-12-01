@@ -1,6 +1,6 @@
 PRINT @@VERSION
 GO
-CREATE DATABASE [tikitapp] COLLATE Latin1_General_CI_AS
+CREATE DATABASE [tikitapp] COLLATE Latin1_General_CI_AI
 GO
 CREATE LOGIN [tikitapp_user] WITH 
 	PASSWORD=N'tikitapp_password', 

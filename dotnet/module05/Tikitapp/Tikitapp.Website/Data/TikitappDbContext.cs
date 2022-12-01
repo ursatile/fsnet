@@ -8,11 +8,5 @@ public class TikitappDbContext : DbContext {
 		: base(options) { }
 
 	public virtual DbSet<Artist> Artists => Set<Artist>();
-
-	protected override void OnModelCreating(ModelBuilder builder) {
-		builder.Entity<Artist>(entity => {
-			entity.Property(e => e.Id).HasDefaultValueSql("NEWSEQUENTIALID()");
-		});
-	}
 }
 

@@ -3,9 +3,8 @@ using Tikitapp.Website.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add this line BEFORE AddControllersWithViews() to use lowercase URLs
+// Add services to the container.
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
-
 builder.Services.AddControllersWithViews();
 var sqlConnectionString = builder.Configuration.GetConnectionString("Tikitapp");
 builder.Services.AddDbContext<TikitappDbContext>(

@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
+namespace Tikitapp.Website.Data.Entities;
+
 public class Artist {
 	public Guid Id { get; set; }
 
@@ -7,5 +9,5 @@ public class Artist {
 	public string Name { get; set; } = String.Empty;
 
 	[MaxLength(100)]
-	public string Slug { get; set; }
+	public string Slug { get; set; } = String.Empty;
 }

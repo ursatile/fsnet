@@ -1,4 +1,4 @@
-namespace Tikitapp.Website.Tests;
+namespace Tikitapp.Website.Tests.Controllers;
 
 public class HomeControllerTests {
 

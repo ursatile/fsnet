@@ -20,18 +20,6 @@ namespace Tikitapp.Website.Migrations {
 				name: "IX_Artists_Slug",
 				table: "Artists",
 				column: "Slug");
-
-			// Convert artist names into ASCII slugs, removing accents and whitespace
-			migrationBuilder.Sql(@"UPDATE Artists SET Slug = REPLACE(
-						REPLACE(
-							REPLACE(
-								LOWER(
-									CAST(Name as varchar) 
-									COLLATE SQL_Latin1_General_Cp1253_CI_AI
-								), ' ', '-'
-							), '''', ''
-						), '?', ''
-				)");
 		}
 
 		/// <inheritdoc />

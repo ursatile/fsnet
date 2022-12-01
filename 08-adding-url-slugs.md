@@ -89,7 +89,7 @@ We'll update `Artists/Index.cshtml` to include the `Slug` when creating URLs:
 ```html
 @foreach (var artist in Model) {
     <li>
-        <a href="@Url.Action("View", "Artists", new { id = artist.Slug })">@artist.Name</a>
+        <a href="@Url.Action("Shows", "Artists", new { id = artist.Slug })">@artist.Name</a>
     </li>
 }
 ```

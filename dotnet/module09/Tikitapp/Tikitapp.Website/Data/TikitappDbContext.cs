@@ -17,8 +17,9 @@ public class TikitappDbContext : DbContext {
 	public virtual DbSet<Ticket> Tickets => Set<Ticket>();
 
 	protected override void OnModelCreating(ModelBuilder builder) {
-
-	
+		builder.Entity<Artist>(entity => {
+			entity.HasMany(a => a.Shows).WithOne(s => s.Artist);
+		});
 	}
 
 	private bool IsSlug(PropertyInfo prop) => prop.PropertyType == typeof(string) && prop.Name == "Slug";

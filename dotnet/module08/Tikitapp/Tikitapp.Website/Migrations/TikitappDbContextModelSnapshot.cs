@@ -26,8 +26,7 @@ namespace Tikitapp.Website.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasDefaultValueSql("NEWSEQUENTIALID()");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -44,7 +43,7 @@ namespace Tikitapp.Website.Migrations
 
                     b.HasIndex("Slug");
 
-                    b.ToTable("Artists", (string)null);
+                    b.ToTable("Artists");
                 });
 #pragma warning restore 612, 618
         }
