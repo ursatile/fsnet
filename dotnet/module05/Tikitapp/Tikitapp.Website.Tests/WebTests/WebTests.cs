@@ -1,9 +1,9 @@
-namespace Tikitapp.Website.Tests;
+namespace Tikitapp.Website.Tests.WebTests;
 
-public class WebTests : IClassFixture<WebApplicationFactory<Program>> {
+public class HomeTests : IClassFixture<WebApplicationFactory<Program>> {
 	private readonly WebApplicationFactory<Program> factory = new();
 	[Fact]
-	public async Task Home_Index_Returns_Valid_Html() {
+	public async Task GET_Home_Index_Returns_Valid_Html() {
 		var client = factory.CreateClient();
 		var response = await client.GetAsync("/");
 		response.IsSuccessStatusCode.ShouldBe(true);

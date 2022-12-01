@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Tikitapp.Website.Data;
 
 namespace Tikitapp.Website.Tests.Controllers;
 

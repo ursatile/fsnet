@@ -7,7 +7,7 @@
 <ul>
     @foreach (var artist in Model) {
         <li>
-            <a href="@Url.Action("View", "Artists", new { artist.Id })">@artist.Name</a>
+            <a href="@Url.Action("Shows", "Artists", new { artist.Id })">@artist.Name</a>
         </li>
     }
 </ul>

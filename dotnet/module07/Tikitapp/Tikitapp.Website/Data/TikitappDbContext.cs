@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Tikitapp.Website.Data.Entities;
 
 namespace Tikitapp.Website.Data;
 

@@ -1,5 +1,3 @@
-using Tikitapp.Website.Data.Entities;
-
 namespace Tikitapp.Website.Tests.Controllers;
 
 public class ArtistsControllerTests {
@@ -18,10 +16,10 @@ public class ArtistsControllerTests {
 	}
 
 	[Fact]
-	public async void Artists_View_Returns_Artist() {
+	public async void Artists_Shows_Returns_Artist() {
 		var db = await TestDatabase.CreateDbContext().PopulateWithTestDataAsync();
 		var controller = new ArtistsController(logger, db);
-		var result = controller.View(TestData.Artist1.Slug) as ViewResult;
+		var result = controller.Shows(TestData.Artist1.Slug) as ViewResult;
 		result.ShouldNotBeNull();
 		var model = result.Model as Artist;
 		model.ShouldNotBeNull();
