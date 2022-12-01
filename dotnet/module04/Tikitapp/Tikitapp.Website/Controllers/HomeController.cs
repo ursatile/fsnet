@@ -5,10 +5,10 @@ using Tikitapp.Website.Models;
 namespace Tikitapp.Website.Controllers;
 
 public class HomeController : Controller {
-	private readonly ILogger<HomeController> _logger;
+	private readonly ILogger<HomeController> logger;
 
 	public HomeController(ILogger<HomeController> logger) {
-		_logger = logger;
+		logger = logger;
 	}
 
 	public IActionResult Index() {
