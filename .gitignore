@@ -13,3 +13,4 @@ _site/
 **/obj/
 **/.vs/
 _NCrunch_*/
+nCrunchTemp*
