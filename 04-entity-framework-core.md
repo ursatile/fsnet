@@ -75,7 +75,7 @@ Next, we're going to add the DbContext class that we'll use to connect to our da
 Then we'll add a connection string to our `appsettings.json` file:
 
 ```json
-{% include_relative dotnet/module04/Tikitapp/Tikitapp.Website/appSettings.json %}
+{% include_relative dotnet/module04/Tikitapp/Tikitapp.Website/appsettings.json %}
 ```
 
 This connection string uses the database, username and password that we specified when we created the Tikitapp database using Docker in the previous section.
