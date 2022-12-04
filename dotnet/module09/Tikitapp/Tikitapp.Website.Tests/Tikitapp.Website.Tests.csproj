@@ -29,4 +29,8 @@
     <ProjectReference Include="..\Tikitapp.Website\Tikitapp.Website.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="Pages\Shows\Tickets.cshtml" />
+  </ItemGroup>
+
 </Project>

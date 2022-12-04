@@ -117,7 +117,13 @@ Add this file to your solution folder alongside your `Tikitapp.sln` file.
 
 After adding the .editorconfig file, reformat all the files in your project to match the project's new formatting settings.
 
-From the command line:
+Install the `dotnet-format` tool:
+
+```
+dotnet tool install --global dotnet-format
+```
+
+Then, from the command line:
 
 ```bash
 D:\Projects\Tikitapp>dotnet format
