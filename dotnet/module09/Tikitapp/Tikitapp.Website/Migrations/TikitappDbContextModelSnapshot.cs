@@ -57,6 +57,45 @@ namespace Tikitapp.Website.Migrations
                     b.ToTable("Baskets");
                 });
 
+            modelBuilder.Entity("Tikitapp.Website.Data.Entities.Customer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Customer");
+                });
+
+            modelBuilder.Entity("Tikitapp.Website.Data.Entities.Order", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Order");
+                });
+
             modelBuilder.Entity("Tikitapp.Website.Data.Entities.Show", b =>
                 {
                     b.Property<Guid>("Id")
@@ -93,12 +132,17 @@ namespace Tikitapp.Website.Migrations
                     b.Property<Guid>("BasketId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("OrderId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("ShowId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BasketId");
+
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("ShowId");
 
@@ -134,12 +178,6 @@ namespace Tikitapp.Website.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("CultureInfoName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(50)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -155,17 +193,22 @@ namespace Tikitapp.Website.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TimeZoneId")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(50)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("Slug");
 
                     b.ToTable("Venues");
+                });
+
+            modelBuilder.Entity("Tikitapp.Website.Data.Entities.Order", b =>
+                {
+                    b.HasOne("Tikitapp.Website.Data.Entities.Customer", "Customer")
+                        .WithMany("Orders")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("Tikitapp.Website.Data.Entities.Show", b =>
@@ -195,6 +238,10 @@ namespace Tikitapp.Website.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Tikitapp.Website.Data.Entities.Order", "Order")
+                        .WithMany("Tickets")
+                        .HasForeignKey("OrderId");
+
                     b.HasOne("Tikitapp.Website.Data.Entities.Show", "Show")
                         .WithMany()
                         .HasForeignKey("ShowId")
@@ -202,6 +249,8 @@ namespace Tikitapp.Website.Migrations
                         .IsRequired();
 
                     b.Navigation("Basket");
+
+                    b.Navigation("Order");
 
                     b.Navigation("Show");
                 });
@@ -223,6 +272,16 @@ namespace Tikitapp.Website.Migrations
                 });
 
             modelBuilder.Entity("Tikitapp.Website.Data.Entities.Basket", b =>
+                {
+                    b.Navigation("Tickets");
+                });
+
+            modelBuilder.Entity("Tikitapp.Website.Data.Entities.Customer", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("Tikitapp.Website.Data.Entities.Order", b =>
                 {
                     b.Navigation("Tickets");
                 });
