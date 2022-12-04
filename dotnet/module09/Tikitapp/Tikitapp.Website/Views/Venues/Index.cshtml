@@ -1,0 +1,13 @@
+@model IEnumerable<Venue>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Venues</h1>
+<ul>
+    @foreach (var venue in Model) {
+        <li>
+            <a href="@Url.Action("Shows", "Venues", new { id = venue.Slug })">@venue.Name</a>
+        </li>
+    }
+</ul>

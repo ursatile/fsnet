@@ -1,0 +1,15 @@
+@model Show
+
+<h1>@Model.Artist.Name</h1>
+<p>@Model.Venue.Name</p>
+<p>@Model.Venue.StreetAddress</p>
+<p>@Model.DoorsOpen</p>
+<hr />
+<ul>
+@foreach (var ticketType in Model.TicketTypes)
+{
+	<li>@ticketType.Name
+		@ticketType.Price
+		</li>
+}
+</ul>

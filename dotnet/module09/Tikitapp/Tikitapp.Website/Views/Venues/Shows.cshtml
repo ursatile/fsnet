@@ -1,0 +1,22 @@
+@model Venue
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<h1>@Model.Name</h1>
+@Model.Shows.Count() shows
+<ul>
+@foreach (var show in Model.Shows.OrderBy(show => show.ShowStart))
+{
+	<li>
+		<a href="@Url.Action("Tickets", "Shows", new { id = show.Id })">tickets</a>
+		@show.Artist.Name
+		@show.DoorsOpen.ToString("D")
+		@foreach (var tt in show.TicketTypes)
+		{
+			<text> / </text> 
+			@tt.Name @tt.Price.ToString("C")
+		}
+	</li>
+}
+</ul>
