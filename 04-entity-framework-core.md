@@ -1,7 +1,7 @@
 ---
 title: "4: Introducing EF Core"
 layout: module
-nav_order: 04
+nav_order: 104
 typora-copy-images-to: ./assets/images
 summary: >
     In this section, we'll add Entity Framework Core (EF Core) to our application, and use it to connect to our SQL database and begin using relational data in our application code.

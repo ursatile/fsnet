@@ -1,7 +1,7 @@
 ---
 title: "2: Testing ASP.NET Web Apps"
 layout: module
-nav_order: 02
+nav_order: 102
 typora-copy-images-to: ./assets/images
 summary: >
     In this section, we'll add some tests to our application to demonstrate two different testing styles that work well with ASP.NET Core web applications.

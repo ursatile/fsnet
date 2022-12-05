@@ -1,7 +1,7 @@
 ---
 title: "9: Venues, Shows and Tickets"
 layout: module
-nav_order: 09
+nav_order: 109
 typora-copy-images-to: ./assets/images
 summary: >
     We have code, data, tests, clean URLs, and a solid project structure. Let's add some more classes to our domain.

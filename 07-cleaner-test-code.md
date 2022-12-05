@@ -1,7 +1,7 @@
 ---
 title: "7: Cleaner Test Code"
 layout: module
-nav_order: 07
+nav_order: 107
 typora-copy-images-to: ./assets/images
 summary: >
     Let's clean up the design of our test database and make it easier to reuse it in other tests.

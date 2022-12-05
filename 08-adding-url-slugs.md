@@ -1,7 +1,7 @@
 ---
 title: "8: Using Slugs for Nicer URLs"
 layout: module
-nav_order: 08
+nav_order: 108
 typora-copy-images-to: ./assets/images
 summary: >
     GUIDs are awesome, but they're ugly. Let's make our URLs look prettier by adding URL slugs.
