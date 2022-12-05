@@ -76,10 +76,24 @@ Things to note here:
 * We're adding a `.HasMany().WithOne()` relationship for the various relationships between entities in our system.
 * The `Ticket.Order` property is marked as nullable (`Order?`) since a ticket might not have been ordered yet.
 
-Finally, we'll create and apply the database migration:
+Create and apply the database migration:
 
 ```
 dotnet ef migrations add CreateTablesForDomainModel
 dotnet ef database update
+```
+
+Finally, here are two SQL scripts which will create some venues, shows, and ticket types, giving us some data to work with in the next module:
+
+```sql
+-- populate_venues.sql
+
+{% include_relative dotnet/module09/populate_venues.sql %}
+```
+
+```sql
+-- create_random_shows.sql
+
+{% include_relative dotnet/module09/create_random_shows.sql %}
 ```
 

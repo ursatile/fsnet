@@ -8,5 +8,6 @@ public class Venue {
 	[MaxLength(100)]
 	public string Slug { get; set; } = String.Empty;
 	public string StreetAddress { get; set; } = String.Empty;
+    public string CountryCode { get;set;} = string.Empty;
 	public virtual List<Show> Shows { get; set; } = new();
 }
